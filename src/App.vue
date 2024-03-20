@@ -1,28 +1,49 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="root">
+    <div class="todo-container">
+      <div class="todo-wrap">
+        <Header @add="handleAddTodo"></Header>
+        <Body :list="todoList"></Body>
+        <Footer></Footer>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from "./components/Header.vue";
+import Body from "./components/Body.vue";
+import Footer from "./components/Footer.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Header,
+    Body,
+    Footer,
+  },
+  data() {
+    return {
+      todoList: [
+        { name: "吃饭", id: 1, status: false },
+        { name: "睡觉", id: 2, status: false },
+        { name: "跑步", id: 3, status: false },
+        { name: "游泳", id: 4, status: false },
+        { name: "学习", id: 5, status: false },
+      ],
+    };
+  },
+  provide: () => {
+    return {};
+  },
+  methods: {
+    handleAddTodo(data) {
+      this.todoList.push(data);
+    },
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import "./style/index.css";
 </style>
